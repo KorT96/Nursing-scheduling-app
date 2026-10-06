@@ -1,0 +1,13 @@
+#form{
+    display: flex;
+    justify-content: center;
+}
+
+.h33{
+    font-size: 30px;
+}
+
+.formtext{
+    color: black;
+    width: 60px;
+}
