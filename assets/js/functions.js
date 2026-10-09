@@ -1,3 +1,4 @@
+
 // @codekit-prepend "/vendor/hammer-2.0.8.js";
 
 $( document ).ready(function() {
@@ -5,7 +6,13 @@ $( document ).ready(function() {
   // DOMMouseScroll included for firefox support
   var canScroll = true,
       scrollController = null;
+
   $(this).on('mousewheel DOMMouseScroll', function(e){
+
+    // FIX 1: If scrolling inside the form container, let normal scroll occur!
+    if ($(e.target).closest('#form').length) {
+      return;
+    }
 
     if (!($('.outer-nav').hasClass('is-vis'))) {
 
@@ -26,6 +33,7 @@ $( document ).ready(function() {
         clearTimeout(scrollController);
         scrollController = setTimeout(function(){
           canScroll = true;
+
         }, 800);
         updateHelper(-1);
       }
@@ -42,7 +50,9 @@ $( document ).ready(function() {
           curActive = $this.parent().find('.is-active'),
           curPos = $this.parent().children().index(curActive),
           nextPos = $this.parent().children().index($this),
-          lastItem = $(this).parent().children().length - 1;
+          lastItem = $
+
+(this).parent().children().length - 1;
 
       updateNavs(nextPos);
       updateContent(curPos, nextPos, lastItem);
@@ -59,6 +69,7 @@ $( document ).ready(function() {
         nextPos = lastItem;
 
     updateNavs(lastItem);
+
     updateContent(curPos, nextPos, lastItem);
 
   });
@@ -69,11 +80,21 @@ $( document ).ready(function() {
   mc.get('swipe').set({ direction: Hammer.DIRECTION_VERTICAL });
   mc.on('swipeup swipedown', function(e) {
 
+    // FIX 2: If swiping inside the form on mobile, do not flip slides!
+    if ($(e.target).closest('#form').length) {
+      return;
+    }
+
     updateHelper(e);
 
   });
 
   $(document).keyup(function(e){
+
+    // Do not jump slides when user is typing numbers into the form
+    if ($(e.target).is('input, textarea, select')) {
+      return;
+    }
 
     if (!($('.outer-nav').hasClass('is-vis'))) {
       e.preventDefault();
@@ -100,6 +121,7 @@ $( document ).ready(function() {
         updateNavs(nextPos);
         updateContent(curPos, nextPos, lastItem);
       }
+
     }
     else if (param.type === "swipedown" || param.keyCode === 38 || param < 0){
       if (curPos !== 0){
@@ -119,6 +141,7 @@ $( document ).ready(function() {
   // sync side and outer navigations
   function updateNavs(nextPos) {
 
+
     $('.side-nav, .outer-nav').children().removeClass('is-active');
     $('.side-nav').children().eq(nextPos).addClass('is-active');
     $('.outer-nav').children().eq(nextPos).addClass('is-active');
@@ -129,7 +152,9 @@ $( document ).ready(function() {
   function updateContent(curPos, nextPos, lastItem) {
 
     $('.main-content').children().removeClass('section--is-active');
-    $('.main-content').children().eq(nextPos).addClass('section--is-active');
+    $('.main-content').children().eq(nextPos).addClass('
+
+section--is-active');
     $('.main-content .section').children().removeClass('section--next section--prev');
 
     if (curPos === lastItem && nextPos === 0 || curPos === 0 && nextPos === lastItem) {
@@ -140,6 +165,7 @@ $( document ).ready(function() {
     }
     else {
       $('.main-content').children().eq(curPos).children().addClass('section--prev');
+
     }
 
     if (nextPos !== 0 && nextPos !== lastItem) {
@@ -157,7 +183,9 @@ $( document ).ready(function() {
 
       $('.perspective').addClass('perspective--modalview');
       setTimeout(function(){
-        $('.perspective').addClass('effect-rotate-left--animate');
+        $('.perspective').addClass('effect-
+
+rotate-left--animate');
       }, 25);
       $('.outer-nav, .outer-nav li, .outer-nav--return').addClass('is-vis');
 
@@ -173,6 +201,7 @@ $( document ).ready(function() {
 
     });
 
+
   }
 
   function workSlider() {
@@ -186,6 +215,7 @@ $( document ).ready(function() {
           curCenterPos = $('.slider').children().index(curCenter),
           curRight = $('.slider').find('.slider--item-right'),
           curRightPos = $('.slider').children().index(curRight),
+
           totalWorks = $('.slider').children().length,
           $left = $('.slider--item-left'),
           $center = $('.slider--item-center'),
@@ -200,7 +230,9 @@ $( document ).ready(function() {
         if (curLeftPos < totalWorks - 1 && curCenterPos < totalWorks - 1 && curRightPos < totalWorks - 1) {
           $left.removeClass('slider--item-left').next().addClass('slider--item-left');
           $center.removeClass('slider--item-center').next().addClass('slider--item-center');
-          $right.removeClass('slider--item-right').next().addClass('slider--item-right');
+          $right.removeClass('slider--item-
+
+right').next().addClass('slider--item-right');
         }
         else {
           if (curLeftPos === totalWorks - 1) {
@@ -212,6 +244,7 @@ $( document ).ready(function() {
             $left.removeClass('slider--item-left').next().addClass('slider--item-left');
             $item.removeClass('slider--item-center').first().addClass('slider--item-center');
             $right.removeClass('slider--item-right').next().addClass('slider--item-right');
+
           }
           else {
             $left.removeClass('slider--item-left').next().addClass('slider--item-left');
@@ -224,7 +257,9 @@ $( document ).ready(function() {
         if (curLeftPos !== 0 && curCenterPos !== 0 && curRightPos !== 0) {
           $left.removeClass('slider--item-left').prev().addClass('slider--item-left');
           $center.removeClass('slider--item-center').prev().addClass('slider--item-center');
-          $right.removeClass('slider--item-right').prev().addClass('slider--item-right');
+          $right.removeClass('slider--item-
+
+right').prev().addClass('slider--item-right');
         }
         else {
           if (curLeftPos === 0) {
@@ -237,6 +272,7 @@ $( document ).ready(function() {
             $item.removeClass('slider--item-center').last().addClass('slider--item-center');
             $right.removeClass('slider--item-right').prev().addClass('slider--item-right');
           }
+
           else {
             $left.removeClass('slider--item-left').prev().addClass('slider--item-left');
             $center.removeClass('slider--item-center').prev().addClass('slider--item-center');
@@ -255,6 +291,7 @@ $( document ).ready(function() {
 
   function transitionLabels() {
 
+
     $('.work-request--information input').focusout(function(){
 
       var textVal = $(this).val();
@@ -266,7 +303,6 @@ $( document ).ready(function() {
         $(this).addClass('has-value');
       }
 
-      // correct mobile device window position
       window.scrollTo(0, 0);
 
     });
@@ -275,6 +311,52 @@ $( document ).ready(function() {
 
   outerNav();
   workSlider();
+
   transitionLabels();
 
 });
+
+// --- ALLOCATION SCHEDULER LOGIC ---
+
+// Grab DOM Elements (Using lowercase IDs matching index.html)
+const staffInput = document.getElementById("staffCount");
+const genInput = document.getElementById("genCount");
+const x2Input = document.getElementById("x2Count");
+const x4Input = document.getElementById("x4Count");
+const x6Input = document.getElementById("x6Count");
+const wesx1Input = document.getElementById("wesx1");
+const wesx2Input = 
+
+document.getElementById("wesx2");
+const wesx4Input = document.getElementById("wesx4");
+const runButton = document.getElementById("runBtn");
+
+// Attach click event listener
+if (runButton) {
+  runButton.addEventListener("click", function () {
+    const staff = parseInt(staffInput.value, 10) || 0;
+    const gen = parseInt(genInput.value, 10) || 0;
+    const x2 = parseInt(x2Input.value, 10) || 0;
+    const x4 = parseInt(x4Input.value, 10) || 0;
+    const x6 = parseInt(x6Input.value, 10) || 0;
+    const wesx1 = 
+
+parseInt(wesx1Input.value, 10) || 0;
+    const wesx2 = parseInt(wesx2Input.value, 10) || 0;
+    const wesx4 = parseInt(wesx4Input.value, 10) || 0;
+
+    if (staff <= 0) {
+      alert("Please enter a valid number of staff available.");
+      return;
+    }
+
+    // Sum all categories
+    const totalBeds = gen + x2 + x4 + x6 + wesx1 + wesx2 + wesx4;
+
+    console.log("Total Staff Available:", staff);
+    console.log("Total Beds Calculated:", totalBeds);
+    console.log("Acuity Breakdown:", { gen, 
+
+x2, x4, x6, wesx1, wesx2, wesx4 });
+  });
+}

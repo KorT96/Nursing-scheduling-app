@@ -1614,9 +1614,110 @@ body {
     transition-delay: .16s;
   }
               
+  
+
+/* =========================================================
+   Desktop & Laptop View: Balanced 2-Column Grid
+   ========================================================= */
+.compact-form {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 30px !important;
+  max-width: 620px !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+  box-sizing: border-box !important;
+}
+
+.form-col {
+
+  flex: 1 1 240px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+
+.form-col h4 {
+  margin: 0 0 10px 0 !important;
+  font-size: 0.95rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+  font-weight: 700 !important;
+}
+
+.form-col label {
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  margin: 6px 0 2px 0 !important;
+  text-align: left !important;
+  color: #333 !important;
+}
 
 
+.form-col .formtext {
+  padding: 6px 8px !important;
+  font-size: 0.85rem !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
 
+.formbtn {
+  margin-top: 14px !important;
+  padding: 10px !important;
+  background-color: #222 !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 4px !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  transition: background-color 0.2s ease !
+
+important;
+}
+
+.formbtn:hover {
+  background-color: #000 !important;
+}
+
+/* =========================================================
+   Mobile View (Phones: <= 768px)
+   ========================================================= */
+@media (max-width: 768px) {
+  /* Allow internal container scrolling on phones so the template slider doesn't jump */
+  #form, .about, .about--banner {
+    overflow-y: auto !important;
+    max-height: 85vh !important;
+
+    -webkit-overflow-scrolling: touch !important;
+    padding: 10px !important;
+  }
+
+  .compact-form {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .form-col {
+    width: 100% !important;
+    flex: none !important;
+  }
+
+  .form-col .formtext {
+    padding: 8px 10px !important;
+    font-size: 1rem !important;
+  }
+
+  .formbtn {
+
+    padding: 12px !important;
+    font-size: 1rem !important;
+  }
+}
 
 
 

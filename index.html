@@ -29,25 +29,20 @@
         <header class="header">
           <a class="header--logo" href="#0">
             <img src="assets/img/logo.png" alt="Global">
-            <p>SSWA</p>
+            <p>NSA</p>
           </a>
           <button class="header--cta cta">Hire Us</button>
           <div class="header--nav-toggle">
             <span></span>
           </div>
         </header>
-        <nav class="l-side-nav">
-          <ul class="side-nav">
-            <li class="is-active"><span>Home</span></li>
-            <li><span>Work</span></li>
-          </ul>
-        </nav>
+        
         <ul class="l-main-content main-content">
           <li class="l-section section section--is-active">
             <div class="intro">
               <div class="intro--banner">
-                <h1>Staff<br>Scheduling Web<br>Application</h1>
-                <button class="cta">Scheduling staffs
+                <h1>Nurse<br>Scheduling<br>Application</h1>
+                
                   
                 </button>
                 <img src="./assets/img/unlash.png" alt="Welcome">
@@ -74,14 +69,40 @@
             <div class="about">
               <div class="about--banner">
                 <div id="form">
-                  <form>
-                    <h3 class="h33">Number Of Staffs</h3><br>
-                    <input class="formtext" type="number"><br>
-                    <h3 class="h33">Number Of Beds</h3><br>
-                    <input class="formtext" type="number"><br>
-                    <button style="background-color: rgba(0, 0, 0, 0.514); display: flex; justify-content:center;" type="submit">RUN</button>
-                  </form>
-                  
+                  <form class="compact-form">
+                    <!-- Left Column: 4 items -->
+                    <div class="form-col">
+                      <h4>Ward & Intermittent</h4>
+                      <label>Intermittent General</label>
+                      <input id="genCount" class="formtext" type="number" placeholder="0">
+
+                      <label>Intermittent X2</label>
+                      <input id="x2Count" class="formtext" type="number" placeholder="0">
+
+                      <label>Intermittent X4</label>
+                      <input id="x4Count" class="formtext" type="number" placeholder="0">
+                      
+                      <label>Intermittent X6</label>
+                      <input id="x6Count" class="formtext" type="number" placeholder="0">
+                    </div>
+
+                    <!-- Right Column: 4 items +< button -->
+                    <div class="form-col">
+                      <h4>WES (High Dependency) & Staffs</h4>
+                      <label>WES X1 (1:1)</label>
+                      <input id="wesx1" class="formtext" type="number" placeholder="0">
+
+                      <label>WES X2 (2:1)</label>
+                      <input id="wesx2" class="formtext" type="number" placeholder="0">
+
+                      <label>WES X3 (3:1)</label>
+                      <input id="wesx4" class="formtext" type="number" placeholder="0">
+
+                      <label>Number Of Staffs</label>
+                      <input id="staffCount" class="formtext" type="number" placeholder="0">
+                    </div>
+                    <button id="runBtn" class="formbtn" type="button">RUN ALLOCATION</button>
+                </form>
                 </div>
               </div>
             </div>
@@ -99,5 +120,26 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
 <script src="assets/js/functions-min.js"></script>
+<script>
+  // Shield the form from the template's scroll/swipe hijacking
+  const myForm = document.getElementById("form");
+  if (myForm) {
+    // 1. Block desktop mouse wheel from triggering section switches
+    myForm.addEventListener("wheel", function (e) {
+      e.stopPropagation();
+    }, { passive: false });
+
+    // 2. Block mobile swipe gestures from flipping slides
+    myForm.addEventListener("touchstart", function (e) {
+      e.stopPropagation();
+    }, { passive: true });
+
+    myForm.addEventListener("touchmove", 
+
+function (e) {
+      e.stopPropagation();
+    }, { passive: false });
+  }
+</script>
 </body>
 </html>
