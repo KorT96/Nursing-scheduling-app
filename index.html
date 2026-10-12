@@ -17,7 +17,7 @@
 <div class="device-notification">
   <a class="device-notification--logo" href="#0">
     <img src="assets/img/logo.png" alt="Global">
-    <p>SSWA</p>
+    <p>NSA</p>
   </a>
   <p class="device-notification--message">We dedicate the available staffs to care for our patients</p>
 </div>
@@ -31,7 +31,6 @@
             <img src="assets/img/logo.png" alt="Global">
             <p>NSA</p>
           </a>
-          <button class="header--cta cta">Hire Us</button>
           <div class="header--nav-toggle">
             <span></span>
           </div>
@@ -54,12 +53,12 @@
                 </a>
                 <a>
                   <h3>AVAILABLE BEDS</h3>
-                  <p>Input the beds available</p>
+                  <p>Input the patients</p>
 
                 </a>
                 <a>
                   <h3>RESULT</h3>
-                  <p>Allocate the available staffs to beds</p>
+                  <p>Allocate the available staffs to patients</p>
                 </a>
               </div>
             </div>
@@ -70,6 +69,15 @@
               <div class="about--banner">
                 <div id="form">
                   <form class="compact-form">
+                      <!--Shift option-->
+                    <div style="width:100%; margin-bottom: 18px;">
+                      <label style="display:block; font-size:0.85rem; font-weight: 700; color: #100f0f; margin: 6px; letter-spacing: 0.5;">SELECT SHIFT</label>
+                      <select id="shiftSelect" style="width:100%; padding: 10px 12px; background:rgba(255,255,255,0,08); color:#120e0e; border:1px solid rgba(255,255,255,0,2); border-radius: 4px; font-size: 0.95; outline: none; cursor: pointer;">
+                        <option value="morning" style="background: #111; color: #fff;">Morning Shift (7:00 AM - 7:00 PM)</option>
+                        <option value="evening" style="background: #111; color: #fff;">Evening Shift (7:00 PM - 7:00 AM)</option>
+                      </select>
+                    </div>
+
                     <!-- Left Column: 4 items -->
                     <div class="form-col">
                       <h4>Ward & Intermittent</h4>
@@ -120,26 +128,64 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
 <script src="assets/js/functions-min.js"></script>
+
 <script>
   // Shield the form from the template's scroll/swipe hijacking
   const myForm = document.getElementById("form");
   if (myForm) {
-    // 1. Block desktop mouse wheel from triggering section switches
     myForm.addEventListener("wheel", function (e) {
       e.stopPropagation();
+
     }, { passive: false });
 
-    // 2. Block mobile swipe gestures from flipping slides
     myForm.addEventListener("touchstart", function (e) {
       e.stopPropagation();
     }, { passive: true });
 
-    myForm.addEventListener("touchmove", 
-
-function (e) {
+    myForm.addEventListener("touchmove", function (e) {
       e.stopPropagation();
     }, { passive: false });
   }
+
+  // Handle allocation submission and transition to result.html
+  const runBtn = document.getElementById("runBtn");
+  if (runBtn) {
+    runBtn.addEventListener("click", function () {
+      const staff = 
+
+parseInt(document.getElementById("staffCount")?.value, 10) || 0;
+      const gen = parseInt(document.getElementById("genCount")?.value, 10) || 0;
+      const x2 = parseInt(document.getElementById("x2Count")?.value, 10) || 0;
+      const x4 = parseInt(document.getElementById("x4Count")?.value, 10) || 0;
+      const x6 = parseInt(document.getElementById("x6Count")?.value, 10) || 0;
+      const wesx1 = parseInt(document.getElementById("wesx1")?.value, 10) || 0;
+      const wesx2 = parseInt(document.getElementById("wesx2")?.value, 10) || 0;
+      const wesx4 = 
+
+parseInt(document.getElementById("wesx4")?.value, 10) || 0;
+
+      if (staff <= 0) {
+        alert("Please enter a valid number of staff available.");
+        return;
+      }
+
+      const totalBeds = gen + x2 + x4 + x6 + wesx1 + wesx2 + wesx4;
+
+      const allocationPayload = {
+        staff: staff,
+        beds: totalBeds,
+        breakdown: { gen, x2, x4, x6, wesx1, wesx2, wesx4 }
+      };
+
+      // Store form data temporarily in the browser
+
+      localStorage.setItem("allocationData", JSON.stringify(allocationPayload));
+
+      // Navigate to the result page
+      window.location.href = "result.html";
+    });
+  }
 </script>
+
 </body>
 </html>

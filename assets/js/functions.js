@@ -325,9 +325,7 @@ const x2Input = document.getElementById("x2Count");
 const x4Input = document.getElementById("x4Count");
 const x6Input = document.getElementById("x6Count");
 const wesx1Input = document.getElementById("wesx1");
-const wesx2Input = 
-
-document.getElementById("wesx2");
+const wesx2Input = document.getElementById("wesx2");
 const wesx4Input = document.getElementById("wesx4");
 const runButton = document.getElementById("runBtn");
 
@@ -339,9 +337,7 @@ if (runButton) {
     const x2 = parseInt(x2Input.value, 10) || 0;
     const x4 = parseInt(x4Input.value, 10) || 0;
     const x6 = parseInt(x6Input.value, 10) || 0;
-    const wesx1 = 
-
-parseInt(wesx1Input.value, 10) || 0;
+    const wesx1 = parseInt(wesx1Input.value, 10) || 0;
     const wesx2 = parseInt(wesx2Input.value, 10) || 0;
     const wesx4 = parseInt(wesx4Input.value, 10) || 0;
 
@@ -355,8 +351,6 @@ parseInt(wesx1Input.value, 10) || 0;
 
     console.log("Total Staff Available:", staff);
     console.log("Total Beds Calculated:", totalBeds);
-    console.log("Acuity Breakdown:", { gen, 
-
-x2, x4, x6, wesx1, wesx2, wesx4 });
+    console.log("Acuity Breakdown:", { gen, x2, x4, x6, wesx1, wesx2, wesx4 });
   });
 }
